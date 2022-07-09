@@ -1,0 +1,113 @@
+﻿@model BankOnline.ViewModels.CustomerRequestViewModel
+@{
+    ViewBag.Title = "CustomerRequestForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Request</h2>
+
+@using (Html.BeginForm("Save", "Requests"))
+{
+    <div class="form-horizontal">
+        <h4>Request</h4>
+        <hr />
+        @Html.ValidationSummary(true, "Please fix the following errors.")
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                Male
+                @Html.RadioButtonFor(m => m.Customer.Gender, 'M', new { @checked = "checked" })
+                Female
+                @Html.RadioButtonFor(m => m.Customer.Gender, 'F')
+                @Html.ValidationMessageFor(model => model.Customer.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.JMBG, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer.JMBG, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer.JMBG, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.IdCardRegNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer.IdCardRegNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer.IdCardRegNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.Adress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer.Adress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer.Adress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Customer.BirthDate)
+            @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyy}", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Customer.Employer, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Customer.Employer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Customer.Employer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Customer.DateOfEmployment)
+            @Html.TextBoxFor(m => m.Customer.DateOfEmployment, "{0:d MMM yyy}", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Customer.TypeOfEmployment)
+            @Html.DropDownListFor(m => m.Customer.TypeOfEmployment, new SelectList(new List<Object>
+                {
+                new { value = 0 , text = "Unemployed"  },
+                new { value = 1 , text = "Full Time" },
+                new { value = 2 , text = "Part Time"},
+                new { value = 3 , text = "Student"},
+                new { value = 4 , text = "Senior Citizen"},
+                },
+                "value",
+                "text"), "<<Select Employment Status>>",
+
+                new { @class = "form-control" })
+
+
+            @Html.ValidationMessageFor(m => m.Customer.TypeOfEmployment)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Brands)
+            @Html.DropDownListFor(m => m.Brands, new SelectList(Model.Brands, "Id", "Name"), "<<Select Brand>>", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Brands)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.TypeOfCards)
+            @Html.DropDownListFor(m => m.TypeOfCards, new SelectList(Model.TypeOfCards, "Id", "Name"), "<<Select Type Of Card>>", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TypeOfCards)
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
